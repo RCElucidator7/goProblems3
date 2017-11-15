@@ -15,7 +15,7 @@ func ElizaResponse(input string) string {
 		"Why do you say that?",
 	}
 
-	iam := regexp.MustCompile("I am ([^.!?]*)[.!?]?")
+	iam := regexp.MustCompile("(?i)i(?:'| a|)?m(.*)")
 	if iam.MatchString(input) {
 		return iam.ReplaceAllString(input, "How do I know you are $1")
 	}
@@ -61,8 +61,8 @@ func main() {
 	fmt.Println("Output: " + ElizaResponse("I'm not happy with your responses"))
 
 	fmt.Println("\nInput: " + "“I AM not sure that you understand the effect that your questions are having on me.”")
-	fmt.Println("Output: " + ElizaResponse("“I am not sure that you understand the effect that your questions are having on me.”"))
+	fmt.Println("Output: " + ElizaResponse("I AM not sure that you understand the effect that your questions are having on me."))
 
 	fmt.Println("\nInput: " + "Im supposed to just take what you’re saying at face value?")
-	fmt.Println("Output: " + ElizaResponse("I am supposed to just take what you’re saying at face value?"))
+	fmt.Println("Output: " + ElizaResponse("Im supposed to just take what you’re saying at face value?"))
 }
