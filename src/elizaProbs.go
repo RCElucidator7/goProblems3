@@ -15,9 +15,14 @@ func ElizaResponse(input string) string {
 		"Why do you say that?",
 	}
 
+	iam := regexp.MustCompile("I am ([^.!?]*)[.!?]?")
+	if iam.MatchString(input) {
+		return iam.ReplaceAllString(input, "How do I know you are $1")
+	}
+
 	//Adapted from https://golang.org/pkg/regexp/
 	//Searchs the input to look for the word "Father" on its own and assigns it to this variable
-	father, _ := regexp.MatchString("(?i)\\bfather\\b", input)
+	father, _ := regexp.MatchString(`(?i)\\bfather\\b`, input)
 	
 	//if the user input contains the word "father" it will return this string
 	if (father) {
@@ -48,4 +53,16 @@ func main() {
 
 	fmt.Println("\nInput: " + "My grandfather was French!")
 	fmt.Println("Output: " + ElizaResponse("My grandfather was French!"))
+
+	fmt.Println("\nInput: " + "I am happy.")
+	fmt.Println("Output: " + ElizaResponse("I am happy."))
+
+	fmt.Println("\nInput: " + "I'm not happy with your responses")
+	fmt.Println("Output: " + ElizaResponse("I'm not happy with your responses"))
+
+	fmt.Println("\nInput: " + "“I AM not sure that you understand the effect that your questions are having on me.”")
+	fmt.Println("Output: " + ElizaResponse("“I am not sure that you understand the effect that your questions are having on me.”"))
+
+	fmt.Println("\nInput: " + "Im supposed to just take what you’re saying at face value?")
+	fmt.Println("Output: " + ElizaResponse("I am supposed to just take what you’re saying at face value?"))
 }
