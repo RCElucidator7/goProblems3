@@ -38,11 +38,12 @@ func reflection(input string) string{
 
 	// List the pronouns to switch
 	pronouns := [][]string{
+		{`am`, `are`},
 		{`I`, `you`},
 		{`me`, `you`},
-		{`you`, `me`},
-		{`my`, `your`},
 		{`your`, `my`},
+		{`you`, `I`},
+		{`my`, `your`},
 	}
 
 	// Split input into values
@@ -54,6 +55,7 @@ func reflection(input string) string{
 	for i, token := range values {
 		for _, reflection := range pronouns {
 			if matched, _ := regexp.MatchString(reflection[0], token); matched {
+				
 				values[i] = reflection[1]
 				break
 			}
@@ -61,7 +63,9 @@ func reflection(input string) string{
 	}
 	
 	//Join the string of values back together
-	return strings.Join(values, ``)
+	answer := strings.Join(values, ``)
+
+	return ("Output: How do you know that " + answer)
 }
 
 
@@ -97,5 +101,6 @@ func main() {
 	fmt.Println("\nInput: " + "Im supposed to just take what you’re saying at face value?")
 	fmt.Println("Output: " + ElizaResponse("Im supposed to just take what you’re saying at face value?"))
 
-	fmt.Println(reflection("You are my friend cause I like you."))
+	fmt.Println("\nInput: I am not sure that you understand the effect your questions are having on me.")
+	fmt.Println(reflection("I am not sure that you understand the effect your questions are having on me."))
 }
