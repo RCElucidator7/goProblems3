@@ -40,9 +40,9 @@ func reflection(input string) string{
 	pronouns := [][]string{
 		{`am`, `are`},
 		{`I`, `you`},
+		{`you`, `I`},
 		{`me`, `you`},
 		{`your`, `my`},
-		{`you`, `I`},
 		{`my`, `your`},
 	}
 
@@ -65,7 +65,13 @@ func reflection(input string) string{
 	//Join the string of values back together
 	answer := strings.Join(values, ``)
 
-	return ("Output: How do you know that " + answer)
+	counterResp := []string{
+		"Why do ",
+		"How do you know that ",
+		"I find it fasinating that ",
+	}
+
+	return (counterResp[rand.Intn(len(counterResp))] + answer)
 }
 
 
@@ -103,4 +109,13 @@ func main() {
 
 	fmt.Println("\nInput: I am not sure that you understand the effect your questions are having on me.")
 	fmt.Println(reflection("I am not sure that you understand the effect your questions are having on me."))
+
+	fmt.Println("\nInput: I have got to go")
+	fmt.Println("Output: " + reflection("I have got to go"))
+
+	fmt.Println("\nInput: You seem very smart")
+	fmt.Println("Output: " + reflection("you seem very smart"))
+
+	fmt.Println("\nInput: I like your dog")
+	fmt.Println("Output: " + reflection("I like your dog"))
 }
